@@ -1,0 +1,33 @@
+
+<form [formGroup]="reactiveForm" (ngSubmit)="showCards()">
+
+        <select name="nameBeer" value="chooseBeer" formControlName="beerName">
+            <option value="">Choose a beer</option>
+            <ng-container *ngFor="let beer of beersnameFilter" >
+                <option value="{{beer.name}}">{{beer.name}}</option>
+            </ng-container>
+        </select>
+
+        <select name="sizeBeer" value="sizeBeer"  formControlName="beerSize">
+            <option value="">Choose size</option>
+            <ng-container *ngFor="let beer of beersTypeFilter">
+                <option value="{{beer.type}}">{{beer.type}}</option>
+            </ng-container>
+        </select>
+
+        <button  [disabled]="reactiveForm.invalid"  type="submit">search</button>
+</form>
+
+
+
+<ng-container *ngIf="beersSelected">
+    <div class="card-container" *ngFor="let beer of beersSelected">
+         <h1>{{beer.name}}</h1>
+         <div class="container-img">
+             <img src="{{beer.imgPath}}" alt="">
+         </div>
+         <p>{{beer.price | currency }}</p>
+         
+    </div>
+   
+</ng-container>
